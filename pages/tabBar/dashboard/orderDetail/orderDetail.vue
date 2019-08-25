@@ -3,12 +3,13 @@
 
     <view style="padding-top:20px;padding-bottom:40px;"">
     <view class="" style=" display:flex;width: 100%;">
+
         <view class="" style="flex:1;display: flex;align-items: center; justify-content: center; " @click="swiper_index = 0">
             <text class="iconfont">&#xe606;{{swiper_index}}</text>
         </view>
 
         <view class="uni-margin-wrap" style="flex:10">
-            <swiper class="swiper" :current="swiper_index" v-model="swiper_index" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" @change="asd">
+            <swiper class="swiper" :current="swiper_index" v-model="swiper_index" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" @change="changeSwiper">
                 <swiper-item>
                     <media-list :options="newsitem" @close="close(index1,index2)"></media-list>
                 </swiper-item>
@@ -20,9 +21,11 @@
                 </swiper-item>
             </swiper>
         </view>
+
         <view class="" style="flex:1;display: flex;align-items: center; justify-content: center; " @click="swiper_index = 1">
             <text class="iconfont">&#xe64b;{{swiper_index}}</text>
         </view>
+
     </view>
 
 
@@ -73,6 +76,11 @@ export default {
     },
     onLoad(e) {
         this.title = e.title || '';
+    },
+    methods: {
+      changeSwiper(e){
+          this.swiper_index = parseInt(e.detail.current)
+      }
     }
 }
 </script>
@@ -84,7 +92,7 @@ export default {
     background: linear-gradient(top, rgb(49, 147, 186, 1) 1%, rgb(117, 216, 250) 99%);
 } */
 .listBg {
-    background: linear-gradient(top, rgb(49, 147, 186, 1) 1%, rgb(117, 216, 250) 99%);
+    background: linear-gradient(rgba(49, 147, 186, 1), rgba(117, 216, 250,1));
 }
 
 .uni-margin-wrap {

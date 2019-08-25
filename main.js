@@ -8,6 +8,10 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+import $request from "./tools/ajax.js";
+Vue.prototype.$request = $request;
+
+
 Vue.prototype.$store = store
 Vue.prototype.$backgroundAudioData = {
 	playing: false,

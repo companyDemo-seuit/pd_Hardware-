@@ -1,292 +1,226 @@
 <template>
-<view class="uni-tab-bar" id='dashboard'>
-    <scroll-view id=" tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
-        <view v-for="(tab,index) in tabBars" :key="tab.id" class="swiper-tab-list" :class="tabIndex==index ? 'active' : ''" :id="tab.id" :data-current="index" @click="tapTab" style="padding:13px 0;">{{tab.name}}</view>
-        </scroll-view>
-        <!-- <li v-for="x in arrList">{{x.picName}}</li> 接口测试-->
-        <swiper :current="tabIndex" class="swiper-box swbg" :duration="300" @change="changeTab">
-            <swiper-item v-for="(tab,index1) in newsitems" :key="index1">
-                <scroll-view class="list" scroll-y @scrolltolower="loadMore(index1)">
-                    <block v-for="(newsitem,index2) in tab.data" :key="index2">
-                        <view style="padding-top:20px;padding-bottom:20px;"">
-                        <media-list :options="newsitem" @close="close(index1,index2)" @click="goDetail(newsitem)"></media-list>
+<view class="example listBg">
+
+    <uni-nav-bar :fixed="false" color="#333333" background-color="#FFFFFF" right-icon="scan" @click-left="showCity" @click-right="scan">
+        <block slot="left">
+            <view class="city">
+                <view>{{ city }}</view>
+                <uni-icon type="arrowdown" color="#333333" size="22" />
+            </view>
+        </block>
+        <view class="input-view">
+            <uni-icon type="search" size="22" color="#666666" />
+            <input confirm-type="search" class="input" type="text" placeholder="输入搜索关键词" @confirm="confirm" />
+        </view>
+    </uni-nav-bar>
+    <view style="padding-top:20px;padding-bottom:40px;"">
+        <media-list :options=" newsitem" @close="close(index1,index2)">
+        </media-list>
+
+        <view class="list-cell " hover-class="uni-list-cell-hover" @click="bindClick" style="margin: 0 25px  0 25px;background:#fff">
+            <view class="media-list" style="margin: 0px 25px 5px 25px;border-top: 1px solid#ccc;">
+                <view class="uni-triplex-left" style="width:100%;padding:20px 0 ">
+                    <text class="uni-text">销售联系人:张三 <text class="uni-h5" style="padding-left:15px;"> 联系电话:12381233322</text></text>
                 </view>
-                    </block>
-                    <view class="uni-tab-bar-loading">
-                        {{tab.loadingText}}
+            </view>
+
+            <view style="padding:10px 0" @click="goDetail(newsitem)">
+                <view class="media-list" style="display: flex;width: 100%;">
+                    <view class="uni-list" style="flex: 6;">
+                        <view class="uni-list-cell" hover-class="uni-list-cell-hover">
+                            <view class="uni-media-list">
+                                <view class="uni-media-list-logo">
+                                    <image :src="newsitem.image_url"></image>
+                                </view>
+                                <view class="uni-media-list-body">
+                                    <view class="uni-media-list-text-top">{{newsitem.title}}</view>
+                                    <view class="uni-media-list-text-bottom uni-ellipsis">{{newsitem.title}}</view>
+                                </view>
+                            </view>
+                        </view>
                     </view>
-                </scroll-view>
-            </swiper-item>
-            <view class="uni-loadmore" v-if="showLoadMore">{{loadMoreText}}</view>
+                    <view style="flex: 2;">
+                        <view v-show="newsitem.comment_count == 0" class="rcircle_blue">完</view>
+                        <view v-show="newsitem.comment_count == 1" class="rcircle_red">未</view>
+                    </view>
+                </view>
+                <view class="progress-box" style="padding:0px 65px 0px 25px;color: #57bde5;">
+                    <progress percent="80" activeColor="#57bce8" backgroundColor="#e5e6ea" active stroke-width="10" style='border-radius:5px;overflow:hidden;'></progress>
+                    <div class="" style="float:right;position: relative;top: -18px;left: 50px;">80%</div>
+                </view>
+            </view>
+            <view style="padding:10px 0" @click="goDetail(newsitem)">
+                <view class="media-list" style="display: flex;width: 100%;">
+                    <view class="uni-list" style="flex: 6;">
+                        <view class="uni-list-cell" hover-class="uni-list-cell-hover">
+                            <view class="uni-media-list">
+                                <view class="uni-media-list-logo">
+                                    <image :src="newsitem.image_url"></image>
+                                </view>
+                                <view class="uni-media-list-body">
+                                    <view class="uni-media-list-text-top">{{newsitem.title}}</view>
+                                    <view class="uni-media-list-text-bottom uni-ellipsis">{{newsitem.title}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view style="flex: 2;">
+                        <view v-show="newsitem.comment_count == 0" class="rcircle_blue">完</view>
+                        <view v-show="newsitem.comment_count == 1" class="rcircle_red">未</view>
+                    </view>
+                </view>
+                <view class="progress-box" style="padding:0px 65px 0px 25px;color: #57bde5;">
+                    <progress percent="80" activeColor="#57bce8" backgroundColor="#e5e6ea" active stroke-width="10" style='border-radius:5px;overflow:hidden;'></progress>
+                    <div class="" style="float:right;position: relative;top: -18px;left: 50px;">80%</div>
+                </view>
+            </view>
+            <view style="padding:10px 0" @click="goDetail(newsitem)">
+                <view class="media-list" style="display: flex;width: 100%;">
+                    <view class="uni-list" style="flex: 6;">
+                        <view class="uni-list-cell" hover-class="uni-list-cell-hover">
+                            <view class="uni-media-list">
+                                <view class="uni-media-list-logo">
+                                    <image :src="newsitem.image_url"></image>
+                                </view>
+                                <view class="uni-media-list-body">
+                                    <view class="uni-media-list-text-top">{{newsitem.title}}</view>
+                                    <view class="uni-media-list-text-bottom uni-ellipsis">{{newsitem.title}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view style="flex: 2;">
+                        <view v-show="newsitem.comment_count == 0" class="rcircle_blue">完</view>
+                        <view v-show="newsitem.comment_count == 1" class="rcircle_red">未</view>
+                    </view>
+                </view>
+                <view class="progress-box" style="padding:0px 65px 0px 25px;color: #57bde5;">
+                    <progress percent="80" activeColor="#57bce8" backgroundColor="#e5e6ea" active stroke-width="10" style='border-radius:5px;overflow:hidden;'></progress>
+                    <div class="" style="float:right;position: relative;top: -18px;left: 50px;">80%</div>
+                </view>
+            </view>
 
 
-        </swiper>
+        </view>
+    </view>
 </view>
 </template>
 <script>
+import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
+import uniIcon from '@/components/uni-icon/uni-icon.vue'
 import mediaList from '@/components/tab-nvue/mediaList.vue';
-
-const tpl = {
-    data0: {
-        "datetime": "40分钟前",
-        "article_type": 0,
-        "title": "不锈钢管订购合同1",
-        "source": "订单号：000002352356",
-        "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
-        "comment_count": 0
-    },
-    data1: {
-        "datetime": "一天前",
-        "article_type": 1,
-        "title": "不锈钢管订购合同2",
-        "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
-        "source": "订单号：000002352356",
-        "comment_count": 1
-    },
-    data2: {
-        "datetime": "一天前",
-        "article_type": 2,
-        "title": "不锈钢管订购合同3",
-        "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90",
-        "source": "订单号：000002352356",
-        "comment_count": 1
-    },
-    data3: {
-        "article_type": 3,
-        "image_list": [{
-            "url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg?imageView2/3/w/200/h/100/q/90",
-            "width": 563,
-            "height": 316
-        }, {
-            "url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90",
-            "width": 641,
-            "height": 360
-        }, {
-            "url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
-            "width": 640,
-            "height": 360
-        }],
-        "datetime": "5分钟前",
-        "title": "不锈钢管订购合同4",
-        "source": "订单号：000002352356",
-        "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
-        "comment_count": 0
-    },
-    data4: {
-        "datetime": "2小时前",
-        "article_type": 4,
-        "title": "不锈钢管订购合同5",
-        "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
-        "source": "订单号：000002352356",
-        "comment_count": 1
-    }
-};
-
 export default {
     components: {
+        uniNavBar,
+        uniIcon,
         mediaList
     },
     data() {
         return {
-            scrollLeft: 0,
-            isClickChange: false,
-            tabIndex: 0,
-            newsitems: [],
-            tabBars: [{
-                name: '全部合同',
-                id: 'guanzhu'
-            }, {
-                name: '未完成',
-                id: 'tuijian'
-            }, {
-                name: '已完成',
-                id: 'tiyu'
-            }],
-            arrList: [],
-            title: '下拉刷新 + 加载更多',
-            loadMoreText: "加载中...",
-            showLoadMore: false,
-            max: 0
+            city: '北京',
+            newsitem: {
+                "datetime": "40分钟前",
+                "article_type": 0,
+                "title": "不锈钢管订购合同1",
+                "source": "订单号：000002352356",
+                "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
+                "comment_count": 0
+            },
         }
     },
-    onLoad() {
-        this.newsitems = this.randomfn()
-        // this.toRobot()
-    },
-    onUnload() {
-        this.max = 0,
-            this.data = [],
-            this.loadMoreText = "加载更多",
-            this.showLoadMore = false;
-    },
-    // onReachBottom() {
-    // 	debugger
-    // 	console.log("onReachBottom");
-    // 	if (this.max > 40) {
-    // 		this.loadMoreText = "没有更多数据了!"
-    // 		return;
-    // 	}
-    // 	this.showLoadMore = true;
-    // 	setTimeout(() => {
-    // 		this.setDate();
-    // 	}, 300);
-    // },
-    onPullDownRefresh() {
-        // this.toRobot()
+    onLoad(e) {
+        this.title = e.title || '';
+        this.test_get()
     },
     methods: {
-        toRobot() {
-            // this.addMessage('home', info, false);
-            var apiUrl = 'http://222.73.22.8:43433/api/dashboardList?picType=';
-            uni.request({
-                url: apiUrl,
-                data: {
-                    // "key": 'acfbca724ea1b5db96d2eef88ce677dc',
-                    // "info": info,
-                    // "userid": 'uni-test'
-                },
-                success: (res) => {
-                    console.log("data", res);
-                    this.arrList = res.data.data.list
-                    uni.stopPullDownRefresh();
-                    console.log('request success:' + this.arrList);
-                },
-                fail: (err) => {
-                    console.log('request fail', err);
-                    uni.showModal({
-                        content: err.errMsg,
-                        showCancel: false
-                    })
-                }
-            });
-        },
-        // setDate() {
-        // 	let data = [];
-        // 	this.max += 10;
-        // 	for (var i = this.max - 9; i < this.max + 1; i++) {
-        // 		data.push(i)
-        // 	}
-        // 	debugger
-        // 	this.arrList = this.arrList.concat(data);
-        // },
-        onPullDownRefresh() {
-            console.log('refresh');
-            setTimeout(function() {
-                uni.stopPullDownRefresh();
-            }, 1000);
-        },
         goDetail(e) {
             uni.navigateTo({
-                url: '/pages/tabBar/dashboard/contractDetail/contractDetail?title=' + e.title
+                url: '/pages/tabBar/dashboard/orderDetail/orderDetail?title=' + e.title
             });
         },
-        close(index1, index2) {
-            uni.showModal({
-                content: '是否删除本条信息？',
-                success: (res) => {
-                    if (res.confirm) {
-                        this.newsitems[index1].data.splice(index2, 1);
-                    }
-                }
-            })
+        showCity() {
+          uni.showToast({
+            title: '选择城市'
+          });
         },
-        loadMore(e) {
-            setTimeout(() => {
-                this.addData(e);
-            }, 1200);
+        scan() {
+          uni.showToast({
+            title: '扫码'
+          });
         },
-        addData(e) {
-            if (this.newsitems[e].data.length > 30) {
-                this.newsitems[e].loadingText = '没有更多了';
-                return;
-            }
-            for (let i = 1; i <= 10; i++) {
-                this.newsitems[e].data.push(tpl['data' + Math.floor(Math.random() * 5)]);
-            }
-        },
-        async changeTab(e) {
-            let index = e.target.current;
-            if (this.newsitems[index].data.length === 0) {
-                this.addData(index)
-            }
-            if (this.isClickChange) {
-                this.tabIndex = index;
-                this.isClickChange = false;
-                return;
-            }
-            let tabBar = await this.getElSize("tab-bar"),
-                tabBarScrollLeft = tabBar.scrollLeft;
-            let width = 0;
 
-            for (let i = 0; i < index; i++) {
-                let result = await this.getElSize(this.tabBars[i].id);
-                width += result.width;
-            }
-            let winWidth = uni.getSystemInfoSync().windowWidth,
-                nowElement = await this.getElSize(this.tabBars[index].id),
-                nowWidth = nowElement.width;
-            if (width + nowWidth - tabBarScrollLeft > winWidth) {
-                this.scrollLeft = width + nowWidth - winWidth;
-            }
-            if (width < tabBarScrollLeft) {
-                this.scrollLeft = width;
-            }
-            this.isClickChange = false;
-            this.tabIndex = index; //一旦访问data就会出问题
+        test_get() {
+          this.$request({
+              url: '/admin/get_product_list',
+              data: {
+                a: 1
+              }
+            }, 'GET')
+            .then(res => {
+              // this.city = res
+              console.log(res);
+            });
         },
-        getElSize(id) { //得到元素的size
-            return new Promise((res, rej) => {
-                uni.createSelectorQuery().select("#" + id).fields({
-                    size: true,
-                    scrollOffset: true
-                }, (data) => {
-                    res(data);
-                }).exec();
-            })
-        },
-        async tapTab(e) { //点击tab-bar
-            let tabIndex = e.target.dataset.current;
-            if (this.newsitems[tabIndex].data.length === 0) {
-                this.addData(tabIndex)
-            }
-            if (this.tabIndex === tabIndex) {
-                return false;
-            } else {
-                let tabBar = await this.getElSize("tab-bar"),
-                    tabBarScrollLeft = tabBar.scrollLeft; //点击的时候记录并设置scrollLeft
-                this.scrollLeft = tabBarScrollLeft;
-                this.isClickChange = true;
-                this.tabIndex = tabIndex;
-            }
-        },
-        randomfn() {
-            let ary = [];
-            for (let i = 0, length = this.tabBars.length; i < length; i++) {
-                let aryItem = {
-                    loadingText: '加载更多...',
-                    data: []
-                };
-                if (i < 1) {
-                    for (let j = 1; j <= 10; j++) {
-                        aryItem.data.push(tpl['data' + Math.floor(Math.random() * 5)]);
-                    }
-                }
-                ary.push(aryItem);
-            }
-            return ary;
+        test_post() {
+          // 基本同GET
+          this.$request({
+    				url: '/admin/get_product_list'
+    			}, 'POST')
+            .then(res => {
+              console.log(res);
+            });
         }
+
     }
 }
 </script>
-
 <style>
-.uni-tab-bar-loading {
-    text-align: center;
-    font-size: 28upx;
-    color: #999;
+/* page {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background:linear-gradient(top,rgb(49, 147, 186,1) 1%,rgb(117, 216, 250) 99%);
+    background-size:100%
+} */
+.listBg {
+    background: linear-gradient(rgba(49, 147, 186, 1), rgba(117, 216, 250,1));
 }
 
-.swbg {
-    background: linear-gradient(top, rgb(49, 147, 186, 1) 1%, rgb(117, 216, 250) 99%);
+
+
+/* 搜索框 */
+.city {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-left: 8px;
+    white-space: nowrap;
 }
+
+.input-view {
+    width: 92%;
+    display: flex;
+    background-color: #e7e7e7;
+    height: 30px;
+    border-radius: 15px;
+    padding: 0 4%;
+    flex-wrap: nowrap;
+    margin: 7px 0;
+    line-height: 30px;
+}
+
+.input-view .uni-icon {
+    line-height: 30px !important;
+}
+
+.input-view .input {
+    height: 30px;
+    line-height: 30px;
+    width: 94%;
+    padding: 0 3%;
+}
+
+/* 搜索框 */
 </style>

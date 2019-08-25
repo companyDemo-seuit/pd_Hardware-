@@ -132,6 +132,6 @@ export default {
     background-size:100%
 } */
 .listBg {
-    background: linear-gradient(top, rgb(49, 147, 186, 1) 1%, rgb(117, 216, 250) 99%);
+    background: linear-gradient(rgba(49, 147, 186, 1), rgba(117, 216, 250,1));
 }
 </style>

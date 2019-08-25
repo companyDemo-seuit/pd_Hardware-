@@ -4,7 +4,7 @@
         {
             "path": "pages/tabBar/dashboard/dashboard",
             "style": {
-                "navigationBarTitleText": "合同页",
+                "navigationBarTitleText": "商家列表",
                 "app-plus": {
                     "bounce": "vertical",
                     "titleNView": {
@@ -55,7 +55,7 @@
         {
             "path": "pages/tabBar/template/template",
             "style": {
-                "navigationBarTitleText": "模版",
+                "navigationBarTitleText": "我的",
                 "app-plus": {
                     "titleNView": {
                         "buttons": [{
