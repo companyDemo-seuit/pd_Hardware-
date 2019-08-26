@@ -1,65 +1,123 @@
 <template>
 <view>
-    <view class="list-cell" hover-class="uni-list-cell-hover" @click="bindClick" style="margin:0px 25px  0px  25px;background:#fff;">
-        <view class="media-list" v-if="options.title">
+    <view class="list-cell " style="padding:0px 20px  0px  20px;">
 
-            <view style="display: flex;">
-                <view class="uni-list" style="flex: 6;">
-                    <view class="uni-list-cell" hover-class="uni-list-cell-hover">
-                        <view class="uni-media-list">
-                            <view class="uni-media-list-logo">
-                                <image :src="options.image_url"></image>
-                            </view>
-                            <view class="uni-media-list-body">
-                                <view class="uni-media-list-text-top">{{options.title}}</view>
-                                <view class="uni-media-list-text-bottom uni-ellipsis">{{options.title}}</view>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-                <view style="flex: 2;">
+          <view class="media-list" v-if="options.title"   @click="bindClick" >
 
-                    <view v-show="options.comment_count == 0" class="rcircle_blue">完</view>
-                    <view v-show="options.comment_count == 1" class="rcircle_red">未</view>
+              <view style="display: flex;">
+                  <view class="uni-list" style="flex: 6;">
+                      <view class="uni-list-cell" >
+                          <view class="uni-media-list">
+                              <view class="uni-media-list-logo">
+                                  <image :src="options.image_url"></image>
+                              </view>
+                              <view class="uni-media-list-body">
+                                  <view class="uni-media-list-text-top">{{options.title}}</view>
+                                  <view class="uni-text" style="display:flex;width: 100%;">
+                                      <uni-rate :size="16" :disabled="true" :value="4" color="#bbb" active-color="#ffad00" @change="onChange" style="flex:1" /> <text class="uni-h5" style="flex:2;padding-left:0px;">4.9分</text></view>
+                                  <view class="uni-h5" style="display:flex;width: 100%;"> 8个评价 <text class="uni-h5" style="flex:2;padding-left:0px;">查看</text></view>
+                                  <view class="uni-media-list-text-bottom uni-ellipsis">业务范围:{{options.about}}</view>
+                                  <view class="button-sp-area uni-h5" style="padding: 10px 0 0 0;">
+                                      <button class="mini-btn" type="default" size="mini">预约</button>
+                                      <button class="mini-btn"  type="primary"  size="mini" style="margin-left:10px;" hover-class="uni-list-cell-hover">下单</button>
+                                  </view>
+                              </view>
+                          </view>
+                      </view>
+                  </view>
+              </view>
 
-                </view>
-            </view>
+          </view>
 
-            <view style="border-bottom: 1px dashed #d9d9d9;position: relative;top: 7px;margin:0 7px;"></view>
-            <view class="semi-circleL"></view>
-            <view class="semi-circleR"></view>
-            <view class="uni-triplex-row" style="padding: 18px 11px 5px 25px;">
-                <view class="uni-triplex-left" style="width:100%">
-                    <text class="uni-text">客户订单号：ZRK45756<text class="uni-h5" style="padding-left:15px;"> 重量：800kg</text></text>
-                    <text class="uni-text">签单日期：2019.3.5   <text class="uni-h5"  style="padding-left:15px;color:#e80000">交货日期：2019.4.12</text></text>
-                    <text class="uni-text-small uni-ellipsis">剩余天数：5天</text>
-                </view>
-            </view>
+              <view class="media-list" v-if="options.title"   @click="bindClick" >
 
-            <view class="progress-box" style="padding:0px 65px 0px 25px;color: #57bde5;">
-                <progress percent="80" activeColor="#57bce8" backgroundColor="#e5e6ea" active stroke-width="10" style='border-radius:5px;overflow:hidden;'></progress>
-                <div class="" style="float:right;position: relative;top: -18px;left: 50px;">80%</div>
-            </view>
+                  <view style="display: flex;">
+                      <view class="uni-list" style="flex: 6;">
+                          <view class="uni-list-cell" >
+                              <view class="uni-media-list">
+                                  <view class="uni-media-list-logo">
+                                      <image :src="options.image_url"></image>
+                                  </view>
+                                  <view class="uni-media-list-body">
+                                      <view class="uni-media-list-text-top">{{options.title}}</view>
+                                      <view class="uni-text" style="display:flex;width: 100%;">
+                                          <uni-rate :size="16" :disabled="true" :value="4" color="#bbb" active-color="#ffad00" @change="onChange" style="flex:1" /> <text class="uni-h5" style="flex:2;padding-left:0px;">4.9分</text></view>
+                                      <view class="uni-h5" style="display:flex;width: 100%;"> 8个评价 <text class="uni-h5" style="flex:2;padding-left:0px;">查看</text></view>
+                                      <view class="uni-media-list-text-bottom uni-ellipsis">业务范围:{{options.about}}</view>
+                                      <view class="button-sp-area uni-h5" style="padding: 10px 0 0 0;">
+                                          <button class="mini-btn" type="default" size="mini">预约</button>
+                                          <button class="mini-btn"  type="primary"  size="mini" style="margin-left:10px;" hover-class="uni-list-cell-hover">下单</button>
+                                      </view>
+                                  </view>
+                              </view>
+                          </view>
+                      </view>
+                  </view>
 
-            <view class="uni-triplex-row" style="padding: 5px 11px 5px 25px;">
-                <view class="uni-triplex-left" style="width:100%">
-                    <text class="uni-text" style="color:#e80000">已发货：320kg<text class="uni-h5"  style="padding-left:15px;color:#e80000">未发货：480kg</text></text>
-                </view>
-            </view>
+              </view>
 
+                  <view class="media-list" v-if="options.title"   @click="bindClick" >
 
-            <view class="uni-triplex-row" style="padding: 25px 15px 25px 25px;">
-                <view class="uni-triplex-left" style="width:100%">
-                    <text class="uni-text" style="color:#e90100;font-size:18px;font-weight:500">合计：¥ 32000.00</text>
-                </view>
-            </view>
-        </view>
+                      <view style="display: flex;">
+                          <view class="uni-list" style="flex: 6;">
+                              <view class="uni-list-cell" >
+                                  <view class="uni-media-list">
+                                      <view class="uni-media-list-logo">
+                                          <image :src="options.image_url"></image>
+                                      </view>
+                                      <view class="uni-media-list-body">
+                                          <view class="uni-media-list-text-top">{{options.title}}</view>
+                                          <view class="uni-text" style="display:flex;width: 100%;">
+                                              <uni-rate :size="16" :disabled="true" :value="4" color="#bbb" active-color="#ffad00" @change="onChange" style="flex:1" /> <text class="uni-h5" style="flex:2;padding-left:0px;">4.9分</text></view>
+                                          <view class="uni-h5" style="display:flex;width: 100%;"> 8个评价 <text class="uni-h5" style="flex:2;padding-left:0px;">查看</text></view>
+                                          <view class="uni-media-list-text-bottom uni-ellipsis">业务范围:{{options.about}}</view>
+                                          <view class="button-sp-area uni-h5" style="padding: 10px 0 0 0;">
+                                              <button class="mini-btn" type="default" size="mini">预约</button>
+                                              <button class="mini-btn"  type="primary"  size="mini" style="margin-left:10px;" hover-class="uni-list-cell-hover">下单</button>
+                                          </view>
+                                      </view>
+                                  </view>
+                              </view>
+                          </view>
+                      </view>
+
+                  </view>
+                      <view class="media-list" v-if="options.title"   @click="bindClick" >
+
+                          <view style="display: flex;">
+                              <view class="uni-list" style="flex: 6;">
+                                  <view class="uni-list-cell" >
+                                      <view class="uni-media-list">
+                                          <view class="uni-media-list-logo">
+                                              <image :src="options.image_url"></image>
+                                          </view>
+                                          <view class="uni-media-list-body">
+                                              <view class="uni-media-list-text-top">{{options.title}}</view>
+                                              <view class="uni-text" style="display:flex;width: 100%;">
+                                                  <uni-rate :size="16" :disabled="true" :value="4" color="#bbb" active-color="#ffad00" @change="onChange" style="flex:1" /> <text class="uni-h5" style="flex:2;padding-left:0px;">4.9分</text></view>
+                                              <view class="uni-h5" style="display:flex;width: 100%;"> 8个评价 <text class="uni-h5" style="flex:2;padding-left:0px;">查看</text></view>
+                                              <view class="uni-media-list-text-bottom uni-ellipsis">业务范围:{{options.about}}</view>
+                                              <view class="button-sp-area uni-h5" style="padding: 10px 0 0 0;">
+                                                  <button class="mini-btn" type="default" size="mini">预约</button>
+                                                  <button class="mini-btn"  type="primary"  size="mini" style="margin-left:10px;" hover-class="uni-list-cell-hover">下单</button>
+                                              </view>
+                                          </view>
+                                      </view>
+                                  </view>
+                              </view>
+                          </view>
+
+                      </view>
     </view>
 </view>
 </template>
 
 <script>
+import uniRate from '@/components/uni-rate/uni-rate.vue'
 export default {
+    components: {
+        uniRate
+    },
     props: {
         options: {
             type: Object,

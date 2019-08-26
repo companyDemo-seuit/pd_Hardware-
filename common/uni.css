@@ -19,6 +19,9 @@
     font-family: iconfont;
     margin-left: 20upx;
 }
+.swbg {
+    background: linear-gradient(rgba(255, 210, 154,1), rgba(255, 92, 67,1))!important;
+}
 
 .checkboxing {
     animation: sploosh 2s linear infinite;
@@ -34,7 +37,7 @@
 }
 
 .uni-media-list {
-    padding: 27px  0 25px 25px!important;
+    padding: 27px  0 15px 25px!important;
 }
 
 .uni-scroll-view {
@@ -71,7 +74,10 @@ uni-view {
     transform: scaleY(.5);
     background-color: #fff !important;
 }
-
+.uni-rate {
+    align-items: center;
+     padding-bottom: 1px;
+  }
 .uni-tab-bar .active {
     color: #fff !important;
     font-weight: bold;
@@ -124,7 +130,7 @@ uni-view {
     margin: 20px 25px;
     width: 30px;
     height: 30px;
-    background-color: #57b9e0;
+    background-color: #f8bd74;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -138,7 +144,7 @@ uni-view {
     width: 7px;
     float: left;
     height: 14px;
-    background-color: #3193ba;
+    background-color: #f8bd74;
     border-radius: 0px 50px 50px 0;
     /* 左上、右上、右下、左下 */
 }
@@ -147,7 +153,7 @@ uni-view {
     width: 7px;
     float: right;
     height: 14px;
-    background-color: #3193ba;
+    background-color: #f8bd74;
     border-radius: 50px 0px 0 50px;
     /* 左上、右上、右下、左下 */
 }
@@ -430,7 +436,7 @@ uni-input div {
 }
 
 .uni-h5 {
-    font-size: 28upx;
+    font-size: 24upx;
     color: #8f8f94;
 }
 
@@ -942,8 +948,8 @@ radio-group label, checkbox-group label {
 }
 
 .uni-media-list-logo {
-    height: 84upx;
-    width: 84upx;
+    height: 122upx;
+    width: 122upx;
     margin-right: 20upx;
 }
 
@@ -964,15 +970,16 @@ radio-group label, checkbox-group label {
 
 .uni-media-list-text-top {
     width: 100%;
-    line-height: 36upx;
-    font-size: 35upx;
+    line-height: 32upx;
+    font-size: 32upx;
     font-weight: 400;
+    padding-bottom: 10upx;
 }
 
 .uni-media-list-text-bottom {
-    width: 100%;
-    line-height: 30upx;
-    font-size: 26upx;
+    width: 90%;
+    line-height: 24upx;
+    font-size: 24upx;
     color: #8f8f94;
 }
 
@@ -1951,4 +1958,17 @@ radio-group label, checkbox-group label {
     top: 50%;
     left: 0;
     transform: translateY(50%);
+}
+uni-button[type=primary] {
+    color: #fff;
+    background-color: #f8bd74!important;
+}
+
+uni-button{
+  border-radius: 0!important;
+      font-size: 15px!important;
+}
+.media-list{
+      margin-bottom: 5px;
+      background:#fff;
 }
